@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Yuliar-Dreams - RANDOM QUOTE</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@800;900&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #f875e2, #4b013b, #1a0226);
+            font-family: 'Montserrat', sans-serif;
+            color: white;
+            padding: 20px;
+            overflow: hidden;
+            animation: gradientShift 20s ease infinite;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 800px;
+            text-align: center;
+            padding: 50px;
+            position: relative;
+            z-index: 2;
+            animation: fadeIn 1.5s ease-out forwards;
+        }
+        
+        .brand {
+            font-size: 2.5rem;
+            font-weight: 800;
+            letter-spacing: 6px;
+            text-transform: uppercase;
+            margin-bottom: 60px;
+            color: #e0e1dd;
+            position: relative;
+            display: inline-block;
+            opacity: 0;
+            animation: slideDown 1.2s 0.3s forwards;
+        }
+        
+        .brand::after {
+            content: '';
+            position: absolute;
+            bottom: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(to right, transparent, #ff6bc1, transparent);
+            border-radius: 2px;
+            animation: expandLine 1s 1.5s forwards;
+        }
+        
+        .random {
+            font-size: 6rem;
+            font-weight: 900;
+            letter-spacing: 5px;
+            text-transform: uppercase;
+            margin-bottom: 10px;
+            text-shadow: 0 5px 15px rgba(0, 0, 0, 0.4);
+            opacity: 0;
+            animation: textGlow 4s 1.8s infinite alternate, 
+                       slideInLeft 1.2s 0.8s forwards;
+        }
+        
+        .quote {
+            font-size: 5.5rem;
+            font-weight: 900;
+            letter-spacing: 5px;
+            text-transform: uppercase;
+            position: relative;
+            margin-top: 30px;
+            opacity: 0;
+            animation: textGlow 4s 2.2s infinite alternate, 
+                       slideInRight 1.2s 1.2s forwards;
+        }
+        
+        .quote::after {
+            content: '';
+            display: block;
+            width: 0;
+            height: 6px;
+            background: linear-gradient(to right, transparent, #ff6bc1, transparent);
+            margin: 25px auto;
+            border-radius: 3px;
+            animation: expandLine 1.5s 2s forwards;
+        }
+        
+        .decoration {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            pointer-events: none;
+        }
+        
+        .circle {
+            position: absolute;
+            border-radius: 50%;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            animation: float 15s infinite ease-in-out;
+        }
+        
+        .circle:nth-child(1) {
+            width: 300px;
+            height: 300px;
+            top: 10%;
+            left: 5%;
+            animation-delay: 0s;
+            box-shadow: 0 0 60px rgba(255, 107, 193, 0.2);
+        }
+        
+        .circle:nth-child(2) {
+            width: 200px;
+            height: 200px;
+            bottom: 15%;
+            right: 10%;
+            animation-delay: 2s;
+            animation-duration: 18s;
+            box-shadow: 0 0 40px rgba(255, 107, 193, 0.15);
+        }
+        
+        .circle:nth-child(3) {
+            width: 150px;
+            height: 150px;
+            top: 40%;
+            right: 15%;
+            animation-delay: 4s;
+            animation-duration: 12s;
+            box-shadow: 0 0 30px rgba(255, 107, 193, 0.1);
+        }
+        
+        .particles {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            pointer-events: none;
+        }
+        
+        .particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: rgba(255, 255, 255, 0.5);
+            border-radius: 50%;
+            animation: fall 8s linear infinite;
+        }
+        
+        @media (max-width: 768px) {
+            .brand { font-size: 2rem; }
+            .random { font-size: 4.5rem; }
+            .quote { font-size: 4rem; }
+        }
+        
+        @media (max-width: 480px) {
+            .brand { font-size: 1.6rem; letter-spacing: 4px; }
+            .random { font-size: 3.2rem; letter-spacing: 3px; }
+            .quote { font-size: 2.8rem; letter-spacing: 3px; }
+            .quote::after { height: 4px; }
+        }
+        
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        @keyframes slideInLeft {
+            from { opacity: 0; transform: translateX(-50px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+        
+        @keyframes slideInRight {
+            from { opacity: 0; transform: translateX(50px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+        
+        @keyframes slideDown {
+            from { opacity: 0; transform: translateY(-50px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        @keyframes expandLine {
+            from { width: 0; }
+            to { width: 220px; }
+        }
+        
+        @keyframes float {
+            0% { transform: translate(0, 0); }
+            25% { transform: translate(20px, 15px); }
+            50% { transform: translate(10px, 25px); }
+            75% { transform: translate(-15px, 10px); }
+            100% { transform: translate(0, 0); }
+        }
+        
+        @keyframes textGlow {
+            0% { text-shadow: 0 0 5px rgba(255, 255, 255, 0.3); }
+            100% { text-shadow: 0 0 20px rgba(255, 107, 193, 0.8), 
+                              0 0 30px rgba(255, 107, 193, 0.6); }
+        }
+        
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        
+        @keyframes fall {
+            0% { transform: translateY(-50px) rotate(0deg); opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 0.5; }
+            100% { transform: translateY(100vh) rotate(360deg); opacity: 0; }
+        }
+    </style>
+    <meta http-equiv="refresh" content="6;url=interface2.html"> 
+</head>
+<body>
+    <div class="decoration">
+        <div class="circle"></div>
+        <div class="circle"></div>
+        <div class="circle"></div>
+    </div>
+    
+    <div class="particles" id="particles"></div>
+    
+    <div class="container">
+        <div class="random">Random</div>
+        <div class="quote">Quote</div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Créer des particules flottantes
+            const particlesContainer = document.getElementById('particles');
+            const particleCount = 50;
+            
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.classList.add('particle');
+                
+                // Position aléatoire
+                particle.style.left = `${Math.random() * 100}%`;
+                particle.style.top = `${Math.random() * 100}%`;
+                
+                // Taille et opacité variables
+                const size = Math.random() * 3 + 1;
+                particle.style.width = `${size}px`;
+                particle.style.height = `${size}px`;
+                particle.style.opacity = Math.random() * 0.5 + 0.1;
+                
+                // Animation avec délai aléatoire
+                particle.style.animationDelay = `${Math.random() * 8}s`;
+                
+                particlesContainer.appendChild(particle);
+            }
+        });
+    </script>
+</body>
+</html>

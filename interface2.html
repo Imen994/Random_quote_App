@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Modern Quote Generator</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+   
+    :root {
+      --primary: #cd5aab;
+      --secondary: #d17dff;
+      --accent: #ff6b8b;
+      --light: #f8f9ff;
+      --dark: #67024b;
+      --text: #6a4a65;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    body {
+      background: linear-gradient(135deg, #e2d4df, #c4b4c1);
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+    }
+
+   
+    .container {
+      width: 90%;
+      max-width: 800px;
+      min-height: 600px;
+      border-radius: 24px;
+      overflow: hidden;
+      box-shadow: 0 25px 50px -12px rgba(67, 1, 50, 0.197);
+      background: rgb(4, 4, 4);
+      position: relative;
+    }
+
+    .background-image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url("image1.jpg");
+  background-size: cover;
+  background-position: center;
+  z-index: 1;
+  opacity: 0.7; 
+    }
+
+   
+    .content {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+      padding: 60px 40px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100%;
+    }
+
+    
+    h1 {
+      font-size: 3.5rem;
+      font-weight: 800;
+      color: var(--dark);
+      margin-bottom: 40px;
+      text-shadow: 2px 2px 4px rgba(5, 5, 5, 0.1);
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      position: relative;
+    }
+
+    h1::after {
+      content: '';
+      position: absolute;
+      bottom: -15px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 80px;
+      height: 4px;
+      background: var(--primary);
+      border-radius: 2px;
+    }
+
+    
+    .quote-container {
+      background: rgba(255, 255, 255, 0.85);
+      border-radius: 16px;
+      padding: 40px 30px;
+      margin: 30px 0;
+      max-width: 600px;
+      position: relative;
+      box-shadow: 0 10px 30px rgba(100, 2, 77, 0.1);
+      border: 1px solid rgba(63, 1, 42, 0.1);
+      transition: all 0.4s ease;
+    }
+
+    .quote-container:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 15px 35px rgba(28, 1, 34, 0.15);
+    }
+
+ 
+    .quote {
+      font-size: 1.8rem;
+      line-height: 1.6;
+      color: var(--text);
+      font-weight: 500;
+      font-style: italic;
+      position: relative;
+      padding: 0 40px;
+      opacity: 0;
+      animation: fadeIn 0.8s ease forwards;
+    }
+
+    .quote::before, .quote::after {
+      content: '"';
+      font-size: 4rem;
+      color: var(--secondary);
+      opacity: 0.15;
+      position: absolute;
+      font-family: Georgia, serif;
+    }
+
+    .quote::before {
+      top: -15px;
+      left: 0;
+    }
+
+    .quote::after {
+      bottom: -50px;
+      right: 0;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(15px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    
+    .author {
+      margin-top: 30px;
+      font-size: 1.3rem;
+      color: var(--primary);
+      font-weight: 600;
+      text-align: center;
+      opacity: 0;
+      animation: fadeIn 0.8s ease 0.3s forwards;
+      position: relative;
+      padding-top: 15px;
+    }
+
+    .author::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 50px;
+      height: 2px;
+      background: var(--accent);
+    }
+
+  
+    .btn-container {
+      margin-top: 40px;
+      position: relative;
+      z-index: 4;
+    }
+
+    button {
+            background: linear-gradient(45deg, #f885df, #9c4ecd);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            padding: 18px 50px;
+            font-size: 1.2rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            box-shadow: 0 5px 25px rgba(255, 107, 238, 0.4);
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+            letter-spacing: 1px;
+    }
+    button::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, #eea5f8, #ff6be9);
+            z-index: -1;
+            opacity: 0;
+            transition: opacity 0.4s ease;
+    }
+    button:hover::before {
+            opacity: 1;
+        }
+
+    button:hover {
+       transform: translateY(-5px) scale(1.05);
+       box-shadow: 0 10px 30px rgba(250, 136, 248, 0.6);
+    }
+
+    button:active {
+      transform: translateY(2px) scale(0.98);
+    }
+
+    
+    .separator {
+      width: 100px;
+      height: 2px;
+      background: var(--accent);
+      margin: 40px auto;
+      opacity: 0.6;
+    }
+
+   
+    @media (max-width: 768px) {
+      .container {
+        min-height: 500px;
+      }
+      
+      h1 {
+        font-size: 2.8rem;
+      }
+      
+      .quote {
+        font-size: 1.5rem;
+        padding: 0 20px;
+      }
+      
+      .quote-container {
+        padding: 30px 20px;
+      }
+      
+      .decor-top-right, .decor-bottom-left {
+        width: 60px;
+        height: 60px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      h1 {
+        font-size: 2.2rem;
+      }
+      
+      .quote {
+        font-size: 1.3rem;
+      }
+      
+      .author {
+        font-size: 1.1rem;
+      }
+      
+      button {
+        padding: 14px 30px;
+      }
+      
+      .decor-top-right, .decor-bottom-left {
+        width: 50px;
+        height: 50px;
+        opacity: 0.5;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="background-image"></div>
+    
+    <div class="decor-top-right"></div>
+    <div class="decor-bottom-left"></div>
+    
+    <div class="content">
+      <h1>RANDOM QUOTE</h1>
+      
+      <div class="quote-container">
+        <p class="quote">The only way to do great work is to love what you do.</p>
+        <p class="author">Steve Jobs</p>
+      </div>
+      
+      <div class="separator"></div>
+      
+      <div class="btn-container">
+        <button id="generateBtn">
+          <i class="fas fa-sync-alt"></i> New Quote
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+   
+    const quotes = [
+      {
+        text: "The only way to do great work is to love what you do.",
+        author: "Steve Jobs"
+      },
+      {
+        text: "Life is what happens when you're busy making other plans.",
+        author: "John Lennon"
+      },
+      {
+        text: "In the end, it's not the years in your life that count. It's the life in your years.",
+        author: "Abraham Lincoln"
+      },
+      {
+        text: "The future belongs to those who believe in the beauty of their dreams.",
+        author: "Eleanor Roosevelt"
+      },
+      {
+        text: "Success is not final, failure is not fatal: It is the courage to continue that counts.",
+        author: "Winston Churchill"
+      },
+      {
+        text: "The greatest glory in living lies not in never falling, but in rising every time we fall.",
+        author: "Nelson Mandela"
+      },
+      {
+        text: "The only impossible journey is the one you never begin.",
+        author: "Tony Robbins"
+      },
+      {
+        text: "Don't watch the clock; do what it does. Keep going.",
+        author: "Sam Levenson"
+      },
+      {
+        text: "The best way to predict the future is to create it.",
+        author: "Peter Drucker"
+      },
+      {
+        text: "Believe you can and you're halfway there.",
+        author: "Theodore Roosevelt"
+      },
+      {
+        text: "It does not matter how slowly you go as long as you do not stop.",
+        author: "Confucius"
+      },
+      {
+        text: "Our greatest weakness lies in giving up. The most certain way to succeed is always to try just one more time.",
+        author: "Thomas Edison"
+      }
+    ];
+
+ 
+    const quoteElement = document.querySelector('.quote');
+    const authorElement = document.querySelector('.author');
+    const generateBtn = document.getElementById('generateBtn');
+    const quoteContainer = document.querySelector('.quote-container');
+
+  
+    function generateQuote() {
+     
+      quoteElement.style.animation = 'none';
+      authorElement.style.animation = 'none';
+      
+      setTimeout(() => {
+        
+        const randomIndex = Math.floor(Math.random() * quotes.length);
+        const quote = quotes[randomIndex];
+        
+    
+        quoteElement.textContent = quote.text;
+        authorElement.textContent = quote.author;
+        
+        quoteElement.style.animation = 'fadeIn 0.8s ease forwards';
+        authorElement.style.animation = 'fadeIn 0.8s ease 0.3s forwards';
+        
+       
+        quoteContainer.style.transform = 'scale(0.98)';
+        setTimeout(() => {
+          quoteContainer.style.transform = 'scale(1)';
+        }, 100);
+      }, 300);
+    }
+
+   
+    generateBtn.addEventListener('click', generateQuote);
+
+    generateQuote();
+  </script>
+</body>
+</html>
